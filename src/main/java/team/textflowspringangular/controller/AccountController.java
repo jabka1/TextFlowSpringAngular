@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import team.textflowspringangular.config.JwtUtil;
 import team.textflowspringangular.dto.UpdateEmailDTO;
 import team.textflowspringangular.dto.UpdatePasswordDTO;
+import team.textflowspringangular.dto.UserResponseDTO;
 import team.textflowspringangular.service.CustomUserDetailsService;
 
 @RestController
@@ -18,6 +19,17 @@ public class AccountController {
     public AccountController(CustomUserDetailsService userDetailsService, JwtUtil jwtUtil) {
         this.userDetailsService = userDetailsService;
         this.jwtUtil = jwtUtil;
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getUser(@RequestHeader("Authorization") String token) {
+        try {
+            String email = jwtUtil.extractUsername(token.substring(7));
+            var user = userDetailsService.getUserByEmail(email);
+            return ResponseEntity.ok(new UserResponseDTO(user.getUsername(), user.getEmail()));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     @PutMapping("/update-email")
@@ -41,7 +53,6 @@ public class AccountController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
-
 
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteAccount(@RequestHeader("Authorization") String token) {
