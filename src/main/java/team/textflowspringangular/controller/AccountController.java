@@ -24,8 +24,8 @@ public class AccountController {
     @GetMapping
     public ResponseEntity<?> getUser(@RequestHeader("Authorization") String token) {
         try {
-            String email = jwtUtil.extractUsername(token.substring(7));
-            var user = userDetailsService.getUserByEmail(email);
+            String username = jwtUtil.extractUsername(token.substring(7));
+            var user = userDetailsService.getUserByUsername(username);
             return ResponseEntity.ok(new UserResponseDTO(user.getUsername(), user.getEmail()));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
