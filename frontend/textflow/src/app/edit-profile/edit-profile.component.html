@@ -1,0 +1,23 @@
+<div class="profile-container">
+    <h2>Edit Profile</h2>
+
+    <div *ngIf="message" class="message">{{ message }}</div>
+
+    <label>Username:</label>
+    <input type="text" [(ngModel)]="username" disabled />
+
+    <label>Current email:</label>
+    <input type="text" [(ngModel)]="email" disabled />
+
+    <label>New email:</label>
+    <input type="email" [(ngModel)]="newEmail" />
+    <button (click)="updateEmail()">Update Email</button>
+
+    <label>New password:</label>
+    <input type="password" [(ngModel)]="newPassword" />
+    <button (click)="updatePassword()">Update Password</button>
+
+    <button class="delete-btn" (click)="deleteAccount()">❌ Delete Account</button>
+
+    <button class="logout-btn" (click)="logout()">Logout</button>
+</div>
