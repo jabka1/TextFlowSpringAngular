@@ -1,9 +1,33 @@
-<div class="auth-container">
-    <h2>Login</h2>
-    <form (ngSubmit)="login()">
-        <input type="text" placeholder="Login" [(ngModel)]="username" name="username" required />
-        <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
-        <button type="submit">Login</button>
-    </form>
-    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>TextFlow - Login</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+<nav class="bg-white shadow-md p-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-gray-800">TextFlow</h1>
+    <a href="/register" class="text-blue-500 hover:text-blue-700 font-medium">Register</a>
+</nav>
+
+<div class="flex justify-center items-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md w-96">
+        <h2 class="text-2xl font-semibold text-center mb-6">Login</h2>
+        <form (ngSubmit)="login()" class="space-y-4">
+            <input type="text" placeholder="Login" [(ngModel)]="username" name="username" required
+                   class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required
+                   class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <button type="submit"
+                    class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition">Login</button>
+        </form>
+        <p *ngIf="errorMessage" class="text-red-500 text-sm text-center mt-2">{{ errorMessage }}</p>
+    </div>
 </div>
+
+</body>
+</html>

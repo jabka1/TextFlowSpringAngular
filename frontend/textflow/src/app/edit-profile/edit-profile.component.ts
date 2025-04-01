@@ -37,30 +37,30 @@ export class EditProfileComponent implements OnInit {
       this.message = 'Invalid email format';
       return;
     }
-
     this.authService.updateEmail(this.newEmail).subscribe({
-      next: () => {
-        this.message = 'Email updated successfully';
-      },
-      error: (error) => {
-        this.message = error.error || 'Failed to update email';
+      next: () => { },
+      error: () => {
+        this.message = 'Failed to update email';
+        return;
       }
     });
+    window.location.reload();
   }
 
   updatePassword() {
-    if (this.newPassword.length < 6) {
-      this.message = 'Password must be at least 6 characters';
+    if (!this.validatePassword(this.newPassword)) {
+      this.message = 'Password must be at least 6 characters and contain at least one digit';
       return;
     }
-
     this.authService.updatePassword(this.newPassword).subscribe({
-      next: () => {
-        this.message = 'Password updated successfully';
-      },
-      error: (error) => {
-        this.message = error.error || 'Failed to update password';
+      next: () => {},
+      error: () => {
+        this.message = 'Failed to update password';
       }
+    });
+    this.router.navigate(['/login']).then(() => {
+      this.authService.logout();
+      window.location.reload();
     });
   }
 
@@ -80,10 +80,14 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
-
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  private validatePassword(password: string): boolean {
+    const passwordRegex = /^(?=.*\d).{6,}$/;
+    return passwordRegex.test(password);
   }
 
   private validateEmail(email: string): boolean {

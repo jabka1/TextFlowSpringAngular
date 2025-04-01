@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostService } from '../posts.service';
 import { AuthService } from '../auth.service';
 import { CommonModule } from "@angular/common";
+import { Router } from '@angular/router';
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 
@@ -22,7 +23,7 @@ export class PostListComponent implements OnInit {
   editingContent: string = '';
   editingPostId: number | null = null;
 
-  constructor(private postService: PostService, private authService: AuthService) {}
+  constructor(private postService: PostService, private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.currentUser = this.authService.getUsername();
@@ -84,5 +85,10 @@ export class PostListComponent implements OnInit {
       );
       window.location.reload();
     }
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

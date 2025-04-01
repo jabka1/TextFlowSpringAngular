@@ -1,23 +1,60 @@
-<div class="profile-container">
-    <h2>Edit Profile</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>TextFlow - Edit Profile</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
 
-    <div *ngIf="message" class="message">{{ message }}</div>
+<nav class="bg-white shadow-md p-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-gray-800">TextFlow</h1>
+    <div class="flex space-x-4">
+        <a href="/posts" class="text-blue-500 hover:text-blue-700 font-medium">Posts</a>
+        <button (click)="logout()" class="text-red-500 hover:text-red-700 font-medium">Logout</button>
+    </div>
+</nav>
 
-    <label>Username:</label>
-    <input type="text" [(ngModel)]="username" disabled />
 
-    <label>Current email:</label>
-    <input type="text" [(ngModel)]="email" disabled />
+<div class="flex justify-center items-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md w-96">
+        <h2 class="text-2xl font-semibold text-center mb-6">Edit Profile</h2>
+        <div *ngIf="message" class="text-red-500 text-sm text-center mt-2">{{ message }}</div>
 
-    <label>New email:</label>
-    <input type="email" [(ngModel)]="newEmail" />
-    <button (click)="updateEmail()">Update Email</button>
+        <div class="space-y-4">
+            <div>
+                <label class="block text-gray-700">Username:</label>
+                <input type="text" [(ngModel)]="username" disabled
+                       class="w-full p-2 bg-gray-100 border border-gray-300 rounded focus:outline-none">
+            </div>
 
-    <label>New password:</label>
-    <input type="password" [(ngModel)]="newPassword" />
-    <button (click)="updatePassword()">Update Password</button>
-
-    <button class="delete-btn" (click)="deleteAccount()">❌ Delete Account</button>
-
-    <button class="logout-btn" (click)="logout()">Logout</button>
+            <div>
+                <label class="block text-gray-700">Current Email:</label>
+                <input type="text" [(ngModel)]="email" disabled
+                       class="w-full p-2 bg-gray-100 border border-gray-300 rounded focus:outline-none">
+            </div>
+            <hr>
+            <div>
+                <label class="block text-gray-700">New Email:</label>
+                <input type="email" [(ngModel)]="newEmail"
+                       class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
+            <button (click)="updateEmail()" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition mt-2">Update Email</button>
+            <hr>
+            <div>
+                <label class="block text-gray-700">New Password:</label>
+                <input type="password" [(ngModel)]="newPassword"
+                       class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
+            <button (click)="updatePassword()" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition mt-2">Update Password</button>
+            <hr>
+            <button class="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600 transition mt-4"
+                    (click)="deleteAccount()">❌ Delete Account</button>
+        </div>
+    </div>
 </div>
+
+</body>
+</html>
