@@ -10,6 +10,7 @@ import { AuthService } from './auth.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import {PostListComponent} from "./posts/posts.component";
 
 @NgModule({
     imports: [
@@ -22,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
         AppComponent,
         LoginComponent,
         RegisterComponent,
-        EditProfileComponent
+        EditProfileComponent,
+        PostListComponent
     ],
 
     providers: [AuthService],

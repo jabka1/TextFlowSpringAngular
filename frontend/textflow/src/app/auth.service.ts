@@ -49,6 +49,13 @@ export class AuthService {
         return token ? new HttpHeaders().set('Authorization', `Bearer ${token}`) : new HttpHeaders();
     }
 
+    getUsername(): string {
+        const token = localStorage.getItem('auth_token');
+        if (!token) return '';
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        return payload.sub;
+    }
+
     getUserProfile(): Observable<any> {
         return this.http.get<any>(`${this.accountUrl}`, { headers: this.getAuthHeaders() });
     }

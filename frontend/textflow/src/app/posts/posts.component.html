@@ -1,0 +1,30 @@
+<div class="post-container">
+    <h2>Posts</h2>
+
+    <input [(ngModel)]="newPostTitle" placeholder="Post title..." />
+    <textarea [(ngModel)]="newPostContent" placeholder="Write a new post..."></textarea>
+    <button (click)="createPost()">Post</button>
+
+    <label>
+        <input type="checkbox" [(ngModel)]="showOnlyMyPosts" (change)="filterPosts()" />
+        Show only my posts
+    </label>
+
+    <div *ngFor="let post of filteredPosts" class="post">
+        <div *ngIf="editingPostId === post.id; else viewMode">
+            <input [(ngModel)]="editingTitle" />
+            <textarea [(ngModel)]="editingContent"></textarea>
+            <button (click)="savePost(post)">Save</button>
+            <button (click)="cancelEdit()">Cancel</button>
+        </div>
+        <ng-template #viewMode>
+            <h3>{{ post.title }}</h3>
+            <p>{{ post.content }}</p>
+            <small>By: {{ post.username }}</small>
+            <div *ngIf="post.username === currentUser">
+                <button (click)="editPost(post)">Edit</button>
+                <button (click)="deletePost(post.id)">Delete</button>
+            </div>
+        </ng-template>
+    </div>
+</div>
