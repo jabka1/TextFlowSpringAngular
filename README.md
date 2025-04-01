@@ -53,7 +53,7 @@ TextFlow is a platform designed for creating, editing, and managing text-based p
 ### 1. Clone the repository
 ```bash
 git clone https://github.com/jabka1/TextFlowSpringAngular.git
-cd TextFlow
+cd TextFlowSpringAngular
 ```
 
 ### 2. Backend Setup
